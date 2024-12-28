@@ -1,0 +1,20 @@
+-- 코드를 작성해주세요
+WITH ECOLI AS (
+    SELECT
+        ID, PARENT_ID
+    FROM
+        ECOLI_DATA
+)
+
+SELECT 
+    q3.ID
+FROM 
+    ECOLI q1
+    INNER JOIN 
+    ECOLI q2 ON q1.ID = q2.PARENT_ID
+    INNER JOIN 
+    ECOLI q3 ON q2.ID = q3.PARENT_ID
+WHERE
+    q1.PARENT_ID IS NULL
+ORDER BY
+    q3.ID
