@@ -1,24 +1,24 @@
 import java.util.*;
+import java.util.stream.*;
 
 class Solution {
     public int solution(String[][] book_time) {
         int answer = 0;
         boolean isBooked;
-        int[][] times = new int[book_time.length][2];
         List<Integer> rooms = new ArrayList<>();
         
-        for (int i=0; i<book_time.length; i++) {
-            for (int j=0; j<2; j++) {
-                times[i][j] = str2int(book_time[i][j]);
-            }
-        }
-        
-        Arrays.sort(times, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[0]-o2[0];
-            }
-        });
+       List<int[]> times = Arrays.stream(book_time)
+            .map((time) -> {
+                int[] output = new int[2];
+                for (int i = 0; i < 2; i++) {
+                    String[] hm = time[i].split(":");
+                    output[i] = Integer.parseInt(hm[0]) * 60 + Integer.parseInt(hm[1]);
+                }
+                return output;
+            })
+            .sorted((a, b) -> Integer.compare(a[0], b[0]))
+            .collect(Collectors.toList());
+
         
         for (int[] time : times) {
             isBooked = false;
@@ -34,10 +34,5 @@ class Solution {
         answer = rooms.size();
             
         return answer;
-    }
-    
-    public int str2int(String time) {
-        String[] hm = time.split(":");
-        return Integer.parseInt(hm[0])*60 + Integer.parseInt(hm[1]);
     }
 }
