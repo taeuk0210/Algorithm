@@ -3,11 +3,9 @@ import java.util.stream.*;
 
 class Solution {
     public int solution(String[][] book_time) {
-        int answer = 0;
         boolean isBooked;
         List<Integer> rooms = new ArrayList<>();
-        
-       List<int[]> times = Arrays.stream(book_time)
+        List<int[]> times = Arrays.stream(book_time)
             .map((time) -> {
                 int[] output = new int[2];
                 for (int i = 0; i < 2; i++) {
@@ -19,7 +17,6 @@ class Solution {
             .sorted((a, b) -> Integer.compare(a[0], b[0]))
             .collect(Collectors.toList());
 
-        
         for (int[] time : times) {
             isBooked = false;
             for (int i=0; i<rooms.size(); i++) {
@@ -31,8 +28,6 @@ class Solution {
             }
             if (!isBooked) rooms.add(time[1]);
         }
-        answer = rooms.size();
-            
-        return answer;
+        return rooms.size();
     }
 }
