@@ -12,8 +12,8 @@ public class Main {
         for (int i=0; i<n; i++) {
             cost[i] = sc.nextInt();
         }
-        int min = 10001;
-        int answer = 0;
+        long min = cost[0];
+        long answer = 0;
         for (int i=0; i<n-1; i++) {
             min = Math.min(min, cost[i]);
             answer += min * dist[i];
